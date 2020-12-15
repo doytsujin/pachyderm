@@ -6565,7 +6565,8 @@ func TestTriggerValidation(t *testing.T) {
 
 func TestLargeDeleteRepo(t *testing.T) {
 	t.Parallel()
-	require.NoError(t, testpachd.WithRealEnv(func(env *testpachd.RealEnv) error {
+	db := dbutil.NewTestDB(t)
+	require.NoError(t, testpachd.WithRealEnv(db, func(env *testpachd.RealEnv) error {
 		numRepos := 10
 		numCommits := 1000
 		var repos []string
